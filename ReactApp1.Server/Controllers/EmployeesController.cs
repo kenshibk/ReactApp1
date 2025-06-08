@@ -71,4 +71,24 @@ public class EmployeesController : ControllerBase
         await _context.SaveChangesAsync();
         return NoContent();
     }
+
+    [HttpGet("custom")]
+    public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployeesCustom()
+    {
+        var employees = await _context.Employees
+            .Include(e => e.Department)
+            .Include(e => e.Salary)
+            .Where(e => e.Salary != null && e.Salary.Amount >= 300000) // šƒJƒXƒ^ƒ€ðŒ
+            .Select(e => new EmployeeDto
+            {
+                EmployeeID = e.EmployeeID,
+                EmployeeName = e.EmployeeName,
+                DepartmentName = e.Department != null ? e.Department.DepartmentName : null,
+                HireDate = e.HireDate,
+                SalaryAmount = e.Salary != null ? e.Salary.Amount : null
+            })
+            .ToListAsync();
+
+        return employees;
+    }
 }

@@ -13,3 +13,10 @@ export async function fetchEmployees(): Promise<Employee[]> {
     if (!res.ok) throw new Error('従業員データの取得に失敗しました');
     return res.json();
 }
+
+// 新しいAPI呼び出し関数を追加
+export async function fetchEmployeesCustom(): Promise<Employee[]> {
+    const res = await fetch('/employees/custom');
+    if (!res.ok) throw new Error('カスタム従業員データの取得に失敗しました');
+    return res.json();
+}
