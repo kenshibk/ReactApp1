@@ -14,10 +14,6 @@ public class EmployeesController : ControllerBase
     private readonly AppDbContext _context;
     public EmployeesController(AppDbContext context) => _context = context;
 
-    //[HttpGet]
-    //public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
-    //    => await _context.Employees.Include(e => e.Department).Include(e => e.Salary).ToListAsync();
-
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployees()
     {
