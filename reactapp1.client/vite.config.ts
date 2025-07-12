@@ -56,8 +56,16 @@ export default defineConfig({
                 target,
                 secure: false,
                 changeOrigin: true
+            },
+            // /api で始まるリクエストをバックエンドに転送する設定を追加
+            '^/api': {
+                target,
+                secure: false,
+                changeOrigin: true,
+                // パスを書き換える: /api/departments -> /api/departments
+                // Vite 5.1以降、デフォルトでパスが維持されるため、rewriteは不要な場合が多い
+                // rewrite: (path) => path.replace(/^\/api/, '/api') 
             }
-            // �K�v�ɉ����đ���API�������ɒǉ�
         },
         port: parseInt(env.DEV_SERVER_PORT || '58974'),
         https: {

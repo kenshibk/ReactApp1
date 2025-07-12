@@ -15,12 +15,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        //options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;//zŠÂQÆA‚½‚¾‚µJavaScript‚Ì•W€“I‚ÈJSON.parse‚Å‚Í‚»‚Ì‚Ü‚Üˆµ‚¦‚Ü‚¹‚ñB
-        //options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;//JSONƒVƒŠƒAƒ‰ƒCƒY‚Éu’l‚ªnull‚ÌƒvƒƒpƒeƒB‚ğo—Í‚µ‚È‚¢v
-    });
+//builder.Services.AddControllers()
+//    .AddJsonOptions(options =>
+//    {
+//        //options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+//        //options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+//    });
 
 var app = builder.Build();
 
@@ -38,6 +38,12 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+//// APIã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã¸ã®ãƒ«ãƒ¼ãƒˆã‚’å…ˆã«ãƒãƒƒãƒ”ãƒ³ã‚°
+//app.MapControllerRoute(
+//    name: "api",
+//    pattern: "api/{controller}/{action=Index}/{id?}");
+
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã¸ã®ãƒ«ãƒ¼ãƒˆ
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
